@@ -1,8 +1,15 @@
 var time = require('../index.js');
 
 
-console.log('seconds', time.seconds(60));
-console.log('minutes', time.minutes(60));
+
+console.log('milliseconds', time.milliseconds(1));
+console.log('centiseconds', time.centiseconds(1));
+console.log('deciseconds', time.deciseconds(1));
+console.log('seconds', time.seconds(1));
+console.log('decaseconds', time.decaseconds(1));
+console.log('halfminutes', time.halfminutes(1));
+console.log('minutes', time.minutes(1));
+
 console.log('hours', time.hours(24));
 console.log('days', time.days(30));
 console.log('weeks', time.weeks(4));
