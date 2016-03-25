@@ -1,5 +1,5 @@
 (function() {
-  var centuries, currentYear, days, daysInMonth, decades, fortnights, hours, isLeapYear, millennia, minutes, months, seconds, weeks, years;
+  var centuries, currentYear, days, daysInMonth, decades, fortnights, hours, inFunctions, isLeapYear, millennia, minutes, months, now, seconds, weeks, years;
 
   seconds = function(n) {
     return n * 1000;
@@ -45,6 +45,42 @@
     return days(n * 14);
   };
 
+  inFunctions = {
+    seconds: function(n) {
+      return n / 1000;
+    },
+    minutes: function(n) {
+      return inFunctions.seconds(n / 60);
+    },
+    hours: function(n) {
+      return inFunctions.minutes(n / 60);
+    },
+    days: function(n) {
+      return inFunctions.hours(n / 24);
+    },
+    weeks: function(n) {
+      return inFunctions.days(n / 7);
+    },
+    months: function(n) {
+      return inFunctions.days(n / 30);
+    },
+    years: function(n) {
+      return inFunctions.days(n / 365);
+    },
+    decades: function(n) {
+      return inFunctions.years(n / 10);
+    },
+    centuries: function(n) {
+      return inFunctions.years(n / 100);
+    },
+    millennia: function(n) {
+      return inFunctions.years(n / 1000);
+    },
+    fortnights: function(n) {
+      return inFunctions.days(n / 14);
+    }
+  };
+
   currentYear = function() {
     return new Date().getFullYear();
   };
@@ -65,7 +101,12 @@
     return new Date(year, month, 0).getDate();
   };
 
+  now = function() {
+    return +new Date();
+  };
+
   module.exports = {
+    "in": inFunctions,
     seconds: seconds,
     minutes: minutes,
     hours: hours,
@@ -79,7 +120,8 @@
     fortnights: fortnights,
     currentYear: currentYear,
     isLeapYear: isLeapYear,
-    daysInMonth: daysInMonth
+    daysInMonth: daysInMonth,
+    now: now
   };
 
 }).call(this);
